@@ -24,4 +24,4 @@
            run: pip install -r requirements.txt
 
          - name: Run the notebook from top to bottom
-           run: jupyter nbconvert --to notebook --execute week1.ipynb --output executed.ipynb
+           run: jupyter nbconvert --to notebook --execute week1.ipynb --output executed.ipynb  --ExecutePreprocessor.kernel_name=python3
