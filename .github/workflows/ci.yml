@@ -1,0 +1,27 @@
+   # Runs week1.ipynb from top to bottom on a fresh machine every time you push.
+   # Green check: every cell ran without an unexpected error.
+   # Red X: some cell failed. Open the run and read the log to find out which one.
+   name: Check notebook
+
+   on:
+     push:
+     workflow_dispatch:
+
+   jobs:
+     run-notebook:
+       runs-on: ubuntu-latest
+       steps:
+         - name: Check out repository
+           uses: actions/checkout@v6
+
+         - name: Set up Python
+           uses: actions/setup-python@v5
+           with:
+             python-version: "3.12"
+             cache: pip
+
+         - name: Install packages listed in requirements.txt
+           run: pip install -r requirements.txt
+
+         - name: Run the notebook from top to bottom
+           run: jupyter nbconvert --to notebook --execute week1.ipynb --output executed.ipynb
